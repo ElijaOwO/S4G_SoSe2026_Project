@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8137c137a3007c942a19a4d82aefcadd, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerData
+  speed: 5
+  toggleInstantSnapDash: 0
+  snapDashDistance: 1.5
+  dashMultiplier: 3
+  dashDuration: 0.2
+  dashDelay: 0
+  dashCooldown: 2
+  attackDuration: 0.1
+  attackCooldown: 1
+  toggleIFrames: 0
+  iFramesDuration: 3
+  iFramesBlinkSpeed: 0.3
+  ignoreDamageDuringDash: 0
+  canAttackDuringDash: 0
+  canDashDuringAttack: 0
