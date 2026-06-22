@@ -93,8 +93,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d97d275d9572ea4d9eeb827d8434abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUI
-  cam: {fileID: 0}
   healthBar: {fileID: 3252251195094659667}
+  attackIndicator: {fileID: 1439894714890531705}
+  healthBarText: {fileID: 1920478548916554874}
 --- !u!114 &6982753629568732598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,11 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeavyMeleeScript
   healthComponent: {fileID: 6982753629568732598}
+  enemyUI: {fileID: 8044172496751632593}
   target: {fileID: 0}
-  attackDistance: 6
-  attackCooldown: 3
-  attackWindup: 0
-  attackDamage: 5
+  enemyData: {fileID: 11400000, guid: c3f6f717a91c84045ae8ef3332c29328, type: 2}
 --- !u!1 &5947624884600051959
 GameObject:
   m_ObjectHideFlags: 0
@@ -229,6 +228,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5236266737695719035, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
+      propertyPath: attackIndicator
+      value: 
+      objectReference: {fileID: 1439894714890531705}
     - target: {fileID: 5843443441790307736, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -318,6 +321,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
+--- !u!114 &1439894714890531705 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3815630819768266195, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
+  m_PrefabInstance: {fileID: 2812586610943778474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
+--- !u!114 &1920478548916554874 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4444693903404110544, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
+  m_PrefabInstance: {fileID: 2812586610943778474}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!114 &3252251195094659667 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 732399701452008697, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}

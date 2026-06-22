@@ -24,6 +24,7 @@ public class RangedEnemy : Enemy
     {
         agent = GetComponent<NavMeshAgent>();
         currentHp = healthComponent.MaxHp;
+        enemyUI.SetAttackValues(enemyData.attackCooldown,0, enemyData.attackDistance);
         targetTf = target.transform;
         repositionMyTimer.maxTime = enemyData.repositionTime;
         repositionCoolDownMyTimer.maxTime = enemyData.repositionCooldown;
@@ -119,6 +120,7 @@ public class RangedEnemy : Enemy
         if (attackCoolDownMyTimer.TimeOut())
         {
             spawner.SpawnProjectile(targetTf);
+            enemyUI.AttackIndicatorCoolDown();
             attackCoolDownMyTimer.Reset();
         }
     }
@@ -144,8 +146,5 @@ public class RangedEnemy : Enemy
     {
         Gizmos.DrawWireSphere(transform.position, enemyData.RepositionDistance);
         Gizmos.color = Color.green;
-        
-        Gizmos.DrawWireSphere(transform.position, enemyData.attackDistance);
-        Gizmos.color = Color.red;
     }
 }

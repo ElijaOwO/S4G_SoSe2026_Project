@@ -1,18 +1,15 @@
+// Author: MS
 using UnityEngine;
 
 public class DamageObject : MonoBehaviour
 {
-
-    private void OnTriggerEnter(Collider other)
+    [SerializeField] private int damage = 1;
+    private void OnTriggerEnter(Collider other) 
     {
-        if (other.CompareTag("Player") && !PlayerMovement.iFrames)
+        if(other.CompareTag("Player"))
         {
-            PlayerMovement player = other.GetComponent<PlayerMovement>();
-
-            if (player != null)
-            {
-                player.activateIFrames();
-            }
+                PlayerPrototype player = other.GetComponent<PlayerPrototype>();
+                player.Hit(damage);
         }
     }
 }

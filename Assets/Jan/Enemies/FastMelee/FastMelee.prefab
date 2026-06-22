@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FastMeleeEnemy
   healthComponent: {fileID: 1994622070498029069}
+  enemyUI: {fileID: 4366880285617162657}
   target: {fileID: 0}
   enemyData: {fileID: 11400000, guid: c3f6f717a91c84045ae8ef3332c29328, type: 2}
 --- !u!114 &1994622070498029069
@@ -243,6 +244,10 @@ PrefabInstance:
       propertyPath: healthBarText
       value: 
       objectReference: {fileID: 5304689707964884234}
+    - target: {fileID: 5236266737695719035, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
+      propertyPath: attackIndicator
+      value: 
+      objectReference: {fileID: 4666690887181670921}
     - target: {fileID: 5843443441790307736, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -348,6 +353,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d97d275d9572ea4d9eeb827d8434abe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyUI
+--- !u!114 &4666690887181670921 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3815630819768266195, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
+  m_PrefabInstance: {fileID: 8372388113071601626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
 --- !u!114 &5304689707964884234 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4444693903404110544, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}

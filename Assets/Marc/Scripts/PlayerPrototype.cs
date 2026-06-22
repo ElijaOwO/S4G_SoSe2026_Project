@@ -1,27 +1,46 @@
+// Author: MS
+// edited by: JET
+using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+
+public class PlayerPrototype : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
     public CharacterController controller;
+    [SerializeField] private MarcPlayerUIController  uiController;
 
+    [SerializeField] private List<LevelExitScript> exits = new List<LevelExitScript>();
     [SerializeField] private PlayerInputHandler inputHandler;
     [SerializeField] private GameObject playerSpriteObject;
 
-    private float currentSpeedMultiplier = 1.0f;
+    [SerializeField] private int hp;
 
+    private float currentSpeedMultiplier = 1.0f;
     private bool isDashing = false;
     private bool canDash = true;
-
-    public static bool isAttacking = false;
     private bool canAttack = true;
+    private bool isAttacking = false;
+    private bool iFrames = false;
 
-    public static bool iFrames = false;
+    private List<GameObject> enemys = new List<GameObject>();
+    private MyTimer attackCoolDownTimer = new MyTimer();
+    
+    public  bool IsAttacking { get { return isAttacking; } }
+    public  bool IFrames { get { return iFrames; } }
+    public int Hp { get { return hp; } }
 
-
+    
     void Update()
+    {
+        Move();
+        
+        attackCoolDownTimer.Update(Time.deltaTime);
+    }
+
+    private void Move()
     {
         Vector2 direction = inputHandler.Direction;
 
@@ -29,7 +48,7 @@ public class PlayerMovement : MonoBehaviour
         float vertical = direction.y;
 
         Vector3 velocity = new Vector3(horizontal, 0, vertical).normalized;
-        controller.Move(velocity * Time.deltaTime * (playerData.speed * currentSpeedMultiplier));
+        controller.Move(velocity * (Time.deltaTime * (playerData.speed * currentSpeedMultiplier)));
     }
 
     public void OnDash()
@@ -55,14 +74,66 @@ public class PlayerMovement : MonoBehaviour
 
     public void OnAttack()
     {
-        if(!playerData.canAttackDuringDash && isDashing)
+        if (attackCoolDownTimer.TimeOut())
+        {
+            if (enemys.Count > 0)
+            {
+                enemys[0].gameObject.GetComponent<Enemy>().Hit(playerData.attackDamage);
+            }
+            
+            StartCoroutine(AttackDurationTimer());
+            attackCoolDownTimer.Reset();
+        }
+    }
+    
+    public void Hit(int damage)
+    {
+        if (iFrames)
         {
             return;
         }
-        else if(!isAttacking && canAttack)
+        
+        hp -= damage;
+        uiController.UpdateProgressBar(hp);
+        activateIFrames();
+        if (hp <= 0)
         {
-            StartCoroutine(Attack());
-            StartCoroutine(StartAttackCooldown());
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    
+    public void RemoveDeadEnemy(GameObject enemy)
+    {
+        if(enemys.Contains(enemy))
+        {
+            enemys.Remove(enemy);
+            
+            foreach (var exit in exits)
+            {
+                exit.RemoveEnemy(enemy.GetComponent<Enemy>());
+            }
+        }
+    }
+    
+    private void OnTriggerEnter (Collider other) 
+    {
+        
+        if (!enemys.Contains(other.gameObject) && other.tag == "Enemy")
+        {
+            enemys.Add(other.gameObject);
+        }
+    }
+
+    private void OnTriggerExit (Collider other) 
+    {
+        if (other.tag == "Enemy")
+        {
+            enemys.Remove(other.gameObject);
         }
     }
 
@@ -91,12 +162,8 @@ public class PlayerMovement : MonoBehaviour
         }
 
         controller.enabled = false;
-
         transform.position += dashDirection * playerData.snapDashDistance;
-
         controller.enabled = true;
-
-        
     }
 
     private IEnumerator PerformDash()
@@ -119,6 +186,13 @@ public class PlayerMovement : MonoBehaviour
             iFrames = false;
         }
     }
+    
+    private IEnumerator AttackDurationTimer()
+    {
+        isAttacking = true;
+        yield return new WaitForSeconds(playerData.attackDuration);
+        isAttacking = false;
+    }
 
     private IEnumerator SnapDashIFrames()
     {
@@ -134,21 +208,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(playerData.dashCooldown);
         canDash = true;
     }
-
-    private IEnumerator Attack()
-    {
-        isAttacking = true;
-        yield return new WaitForSeconds(playerData.attackDuration);
-        isAttacking = false;
-    }
-
-    private IEnumerator StartAttackCooldown()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(playerData.attackCooldown);
-        canAttack = true;
-    }
-
+    
     private IEnumerator StartIFramesDuration()
     {
         iFrames = true;

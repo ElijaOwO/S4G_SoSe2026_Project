@@ -15,6 +15,7 @@ public class HeavyMeleeScript : Enemy
     {
         agent = GetComponent<NavMeshAgent>();
         currentHp = healthComponent.MaxHp;
+        enemyUI.SetAttackValues(enemyData.attackCooldown, enemyData.attackWindup, enemyData.attackDistance);
         attackCoolDownTimer.maxTime = enemyData.attackCooldown;
         attackWindupTimer.maxTime = enemyData.attackWindup;
     }
@@ -54,7 +55,11 @@ public class HeavyMeleeScript : Enemy
     {
         if (attackWindupTimer.TimeOut())
         {
-            target.Hit(enemyData.attackDamage);
+            if (distance < enemyData.attackDistance)
+            {
+                target.Hit(enemyData.attackDamage);
+            }
+            enemyUI.AttackIndicatorCoolDown();
             isWindingUp = false;
             attackCoolDownTimer.Reset();
         }
@@ -68,6 +73,7 @@ public class HeavyMeleeScript : Enemy
             {
                 isWindingUp = true;
                 attackWindupTimer.Reset();
+                enemyUI.AttackIndicatorWindup();
             }
         }
     }

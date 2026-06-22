@@ -2923,6 +2923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ced038b80fd05469495543588f243b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageObject
+  damage: 1
 --- !u!1001 &1943203551
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3637,9 +3638,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2920429798795226697, guid: 7c877bdd625c3d344a23cbd239a9645c, type: 3}
+      propertyPath: hp
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2920429798795226697, guid: 7c877bdd625c3d344a23cbd239a9645c, type: 3}
       propertyPath: dashDelay
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2920429798795226697, guid: 7c877bdd625c3d344a23cbd239a9645c, type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 11400000, guid: f19df057f28f2674a96bcbb878af54a0, type: 2}
     - target: {fileID: 2920429798795226697, guid: 7c877bdd625c3d344a23cbd239a9645c, type: 3}
       propertyPath: dashCooldown
       value: 2

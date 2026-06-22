@@ -1,3 +1,4 @@
+// Author: MS
 using UnityEngine;
 
 public class DestroyableProp : MonoBehaviour
@@ -5,28 +6,33 @@ public class DestroyableProp : MonoBehaviour
     [SerializeField] private int propHealth = 3;
 
     private bool isColliding = false;
-
     private bool hasBeenHit = false;
+    
+    private PlayerPrototype player = null;
 
     private void Update()
     {
-        if (isColliding && PlayerMovement.isAttacking && !hasBeenHit)
+        if (player != null)
         {
-            propHealth--;
-            hasBeenHit = true;
-
-            Debug.Log("Health: " + propHealth);
-
-            if(propHealth <= 0)
+            if (isColliding && player.IsAttacking && !hasBeenHit)
             {
-                Destroy(gameObject);
+                propHealth--;
+                hasBeenHit = true;
+
+                Debug.Log("Health: " + propHealth);
+
+                if(propHealth <= 0)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            
+            if (!player.IsAttacking)
+            {
+                hasBeenHit = false;
             }
         }
         
-        if (!PlayerMovement.isAttacking)
-        {
-            hasBeenHit = false;
-        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,6 +40,10 @@ public class DestroyableProp : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isColliding = true;
+            if (player == null)
+            {
+                player = other.gameObject.GetComponent<PlayerPrototype>();
+            }
         }
     }
 

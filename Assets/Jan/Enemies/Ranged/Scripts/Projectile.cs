@@ -29,7 +29,7 @@ public class Projectile : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.GetComponent<BasicPlayer>().Hit(attackDamage);
+            other.gameObject.GetComponent<PlayerPrototype>().Hit(attackDamage);
         }
         Destroy(gameObject);
     }

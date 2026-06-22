@@ -1,3 +1,4 @@
+// Author: JET
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -5,7 +6,8 @@ using UnityEngine.AI;
 public abstract class Enemy : MonoBehaviour
 {
     [SerializeField] protected EnemyHealthComponent healthComponent;
-    [SerializeField] protected BasicPlayer target;
+    [SerializeField] protected EnemyUI enemyUI;
+    [SerializeField] protected PlayerPrototype target;
     
     protected NavMeshAgent agent;
     protected float distance;
