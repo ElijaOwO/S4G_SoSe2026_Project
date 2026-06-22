@@ -40,7 +40,7 @@ public class FastMeleeEnemy : Enemy
                  InitiateAttack();
              }
          }
-         else if (isWindingUp)
+         if (isWindingUp)
          {
              Attack();
          }

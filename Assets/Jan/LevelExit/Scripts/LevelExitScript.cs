@@ -22,7 +22,6 @@ public class LevelExitScript : MonoBehaviour
 
    public void RemoveEnemy(Enemy enemy)
    {
-      Debug.Log(enemy.IsDestroyed());
       if (enemies.Contains(enemy))
       {
          enemies.Remove(enemy);

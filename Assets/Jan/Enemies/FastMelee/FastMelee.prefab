@@ -74,10 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::FastMeleeEnemy
   healthComponent: {fileID: 1994622070498029069}
   target: {fileID: 0}
-  attackDistance: 4
-  attackCooldown: 2
-  attackWindup: 0
-  attackDamage: 2
+  enemyData: {fileID: 11400000, guid: c3f6f717a91c84045ae8ef3332c29328, type: 2}
 --- !u!114 &1994622070498029069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f69ce5938d3a0514a9092fe1140f14b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealthComponent
-  ui: {fileID: 0}
+  ui: {fileID: 4366880285617162657}
   maxHp: 10
 --- !u!54 &9018112234499246070
 Rigidbody:
@@ -167,8 +164,8 @@ Transform:
   m_GameObject: {fileID: 2745991914982412524}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4146622442682830921}
@@ -242,6 +239,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5236266737695719035, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
+      propertyPath: healthBarText
+      value: 
+      objectReference: {fileID: 5304689707964884234}
     - target: {fileID: 5843443441790307736, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -336,3 +337,25 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5843443441790307736, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
   m_PrefabInstance: {fileID: 8372388113071601626}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4366880285617162657 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5236266737695719035, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
+  m_PrefabInstance: {fileID: 8372388113071601626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d97d275d9572ea4d9eeb827d8434abe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyUI
+--- !u!114 &5304689707964884234 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4444693903404110544, guid: 4e26d4a0d65ec3d4784eef31a6bf717d, type: 3}
+  m_PrefabInstance: {fileID: 8372388113071601626}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI

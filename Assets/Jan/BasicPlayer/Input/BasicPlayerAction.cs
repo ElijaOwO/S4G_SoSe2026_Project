@@ -93,15 +93,6 @@ public partial class @BasicPlayerAction: IInputActionCollection2, IDisposable
             ""id"": ""12095c9e-3e07-4fd3-b2ff-7ff0f722d477"",
             ""actions"": [
                 {
-                    ""name"": ""Dash"",
-                    ""type"": ""Button"",
-                    ""id"": ""64f6655d-67b2-4bc1-9f3d-573fdca8a7fe"",
-                    ""expectedControlType"": """",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""Movement"",
                     ""type"": ""Value"",
                     ""id"": ""aa0ae3ef-d215-4fc1-88cb-355a6d43e18a"",
@@ -123,6 +114,15 @@ public partial class @BasicPlayerAction: IInputActionCollection2, IDisposable
                     ""name"": ""SecondaryAttack"",
                     ""type"": ""Button"",
                     ""id"": ""42791db8-5312-4953-955d-655db038616b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""64f6655d-67b2-4bc1-9f3d-573fdca8a7fe"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -225,10 +225,10 @@ public partial class @BasicPlayerAction: IInputActionCollection2, IDisposable
 }");
         // BasicPlayerInputMap
         m_BasicPlayerInputMap = asset.FindActionMap("BasicPlayerInputMap", throwIfNotFound: true);
-        m_BasicPlayerInputMap_Dash = m_BasicPlayerInputMap.FindAction("Dash", throwIfNotFound: true);
         m_BasicPlayerInputMap_Movement = m_BasicPlayerInputMap.FindAction("Movement", throwIfNotFound: true);
         m_BasicPlayerInputMap_BasicAttack = m_BasicPlayerInputMap.FindAction("BasicAttack", throwIfNotFound: true);
         m_BasicPlayerInputMap_SecondaryAttack = m_BasicPlayerInputMap.FindAction("SecondaryAttack", throwIfNotFound: true);
+        m_BasicPlayerInputMap_Dash = m_BasicPlayerInputMap.FindAction("Dash", throwIfNotFound: true);
     }
 
     ~@BasicPlayerAction()
@@ -309,10 +309,10 @@ public partial class @BasicPlayerAction: IInputActionCollection2, IDisposable
     // BasicPlayerInputMap
     private readonly InputActionMap m_BasicPlayerInputMap;
     private List<IBasicPlayerInputMapActions> m_BasicPlayerInputMapActionsCallbackInterfaces = new List<IBasicPlayerInputMapActions>();
-    private readonly InputAction m_BasicPlayerInputMap_Dash;
     private readonly InputAction m_BasicPlayerInputMap_Movement;
     private readonly InputAction m_BasicPlayerInputMap_BasicAttack;
     private readonly InputAction m_BasicPlayerInputMap_SecondaryAttack;
+    private readonly InputAction m_BasicPlayerInputMap_Dash;
     /// <summary>
     /// Provides access to input actions defined in input action map "BasicPlayerInputMap".
     /// </summary>
@@ -325,10 +325,6 @@ public partial class @BasicPlayerAction: IInputActionCollection2, IDisposable
         /// </summary>
         public BasicPlayerInputMapActions(@BasicPlayerAction wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "BasicPlayerInputMap/Dash".
-        /// </summary>
-        public InputAction @Dash => m_Wrapper.m_BasicPlayerInputMap_Dash;
-        /// <summary>
         /// Provides access to the underlying input action "BasicPlayerInputMap/Movement".
         /// </summary>
         public InputAction @Movement => m_Wrapper.m_BasicPlayerInputMap_Movement;
@@ -340,6 +336,10 @@ public partial class @BasicPlayerAction: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "BasicPlayerInputMap/SecondaryAttack".
         /// </summary>
         public InputAction @SecondaryAttack => m_Wrapper.m_BasicPlayerInputMap_SecondaryAttack;
+        /// <summary>
+        /// Provides access to the underlying input action "BasicPlayerInputMap/Dash".
+        /// </summary>
+        public InputAction @Dash => m_Wrapper.m_BasicPlayerInputMap_Dash;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -366,9 +366,6 @@ public partial class @BasicPlayerAction: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_BasicPlayerInputMapActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_BasicPlayerInputMapActionsCallbackInterfaces.Add(instance);
-            @Dash.started += instance.OnDash;
-            @Dash.performed += instance.OnDash;
-            @Dash.canceled += instance.OnDash;
             @Movement.started += instance.OnMovement;
             @Movement.performed += instance.OnMovement;
             @Movement.canceled += instance.OnMovement;
@@ -378,6 +375,9 @@ public partial class @BasicPlayerAction: IInputActionCollection2, IDisposable
             @SecondaryAttack.started += instance.OnSecondaryAttack;
             @SecondaryAttack.performed += instance.OnSecondaryAttack;
             @SecondaryAttack.canceled += instance.OnSecondaryAttack;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         /// <summary>
@@ -389,9 +389,6 @@ public partial class @BasicPlayerAction: IInputActionCollection2, IDisposable
         /// <seealso cref="BasicPlayerInputMapActions" />
         private void UnregisterCallbacks(IBasicPlayerInputMapActions instance)
         {
-            @Dash.started -= instance.OnDash;
-            @Dash.performed -= instance.OnDash;
-            @Dash.canceled -= instance.OnDash;
             @Movement.started -= instance.OnMovement;
             @Movement.performed -= instance.OnMovement;
             @Movement.canceled -= instance.OnMovement;
@@ -401,6 +398,9 @@ public partial class @BasicPlayerAction: IInputActionCollection2, IDisposable
             @SecondaryAttack.started -= instance.OnSecondaryAttack;
             @SecondaryAttack.performed -= instance.OnSecondaryAttack;
             @SecondaryAttack.canceled -= instance.OnSecondaryAttack;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         /// <summary>
@@ -442,13 +442,6 @@ public partial class @BasicPlayerAction: IInputActionCollection2, IDisposable
     public interface IBasicPlayerInputMapActions
     {
         /// <summary>
-        /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
-        /// </summary>
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
-        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnDash(InputAction.CallbackContext context);
-        /// <summary>
         /// Method invoked when associated input action "Movement" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -469,5 +462,12 @@ public partial class @BasicPlayerAction: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSecondaryAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Dash" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDash(InputAction.CallbackContext context);
     }
 }

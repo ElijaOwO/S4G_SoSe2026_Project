@@ -1,16 +1,23 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class EnemyUI : MonoBehaviour
 {
-    [SerializeField] Camera cam;
+    //[SerializeField] 
+    private Camera cam;
     [SerializeField] private Image healthBar;
     [SerializeField] private TextMeshProUGUI healthBarText;
     
     private int maxHp;
     private int currentHp;
-    
+
+    private void Start()
+    {
+        cam = Camera.main;
+    }
+
     // Update is called once per frame
     void Update()
     {

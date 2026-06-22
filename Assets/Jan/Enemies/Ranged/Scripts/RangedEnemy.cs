@@ -118,19 +118,26 @@ public class RangedEnemy : Enemy
     {
         if (attackCoolDownMyTimer.TimeOut())
         {
-            StartCoroutine(AttackWindUp());
-        }
-    }
-
-    IEnumerator AttackWindUp()
-    {
-        yield return new WaitForSeconds(enemyData.attackCooldown);
-        if (distance < enemyData.attackDistance)
-        {
             spawner.SpawnProjectile(targetTf);
             attackCoolDownMyTimer.Reset();
         }
+    }
+    protected override void Die()
+    {
+        target.RemoveDeadEnemy(gameObject);
+        Destroy(gameObject);
+    }
+    
+    public override void Hit(int damage)
+    {
+        Debug.unityLogger.Log("Hit " + damage);
+        currentHp -= damage;
+        healthComponent.Updatehealth(damage);
         
+        if (currentHp <= 0)
+        {
+            Die();
+        }
     }
 
     private void OnDrawGizmos()
@@ -140,22 +147,5 @@ public class RangedEnemy : Enemy
         
         Gizmos.DrawWireSphere(transform.position, enemyData.attackDistance);
         Gizmos.color = Color.red;
-    }
-    
-    protected override void Die()
-    {
-        target.RemoveDeadEnemy(gameObject);
-        Destroy(gameObject);
-    }
-    
-    public override void Hit(int damage)
-    {
-        currentHp -= damage;
-        healthComponent.Updatehealth(damage);
-        
-        if (currentHp <= 0)
-        {
-            Die();
-        }
     }
 }

@@ -7,15 +7,6 @@
             "id": "12095c9e-3e07-4fd3-b2ff-7ff0f722d477",
             "actions": [
                 {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "64f6655d-67b2-4bc1-9f3d-573fdca8a7fe",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Movement",
                     "type": "Value",
                     "id": "aa0ae3ef-d215-4fc1-88cb-355a6d43e18a",
@@ -37,6 +28,15 @@
                     "name": "SecondaryAttack",
                     "type": "Button",
                     "id": "42791db8-5312-4953-955d-655db038616b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Dash",
+                    "type": "Button",
+                    "id": "64f6655d-67b2-4bc1-9f3d-573fdca8a7fe",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",

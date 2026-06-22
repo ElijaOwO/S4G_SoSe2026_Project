@@ -12,17 +12,27 @@ public class BasicPlayer : MonoBehaviour
     [SerializeField] private CharacterController cc;
     [SerializeField] private List<LevelExitScript> exits = new List<LevelExitScript>();
     [SerializeField] private int hp = 15;
-    [SerializeField] private int attackDamage = 10;
     
-    public int Hp { get => hp; }
-    private List<GameObject> enemys = new List<GameObject>();
-
+    [Header("ATTACK")]
+    [SerializeField] private int attackDamage = 10;
+    [SerializeField] private float attackCooldown = 1;
+    
     [Header("SPEED")]
     [SerializeField] private float moveSpeed = 20;
     
+    public int Hp { get => hp; }
+    private List<GameObject> enemys = new List<GameObject>();
+    private MyTimer attackCoolDownTimer = new MyTimer();
+
+    private void Start()
+    {
+        attackCoolDownTimer.maxTime = attackCooldown;
+    }
+
     private void FixedUpdate()
     {
         Move();
+        attackCoolDownTimer.Update(Time.deltaTime);
     }
 
     private void Move()
@@ -68,24 +78,25 @@ public class BasicPlayer : MonoBehaviour
 
     public void OnAttack()
     {
-        if (enemys.Count > 0)
+        if (enemys.Count > 0 && attackCoolDownTimer.TimeOut())
         {
             enemys[0].gameObject.GetComponent<Enemy>().Hit(attackDamage);
+            attackCoolDownTimer.Reset();
         }
     }
     
-  
-
-    private void OnTriggerEnter (Collider other) {
-
+    private void OnTriggerEnter (Collider other) 
+    {
+        
+        Debug.Log(other.gameObject);
         if (!enemys.Contains(other.gameObject) && other.tag == "Enemy")
         {
-            Debug.Log(other);
             enemys.Add(other.gameObject);
         }
     }
 
-    private void OnTriggerExit (Collider other) {
+    private void OnTriggerExit (Collider other) 
+    {
         if (other.tag == "Enemy")
         {
             enemys.Remove(other.gameObject);
@@ -97,11 +108,11 @@ public class BasicPlayer : MonoBehaviour
         if(enemys.Contains(enemy))
         {
             enemys.Remove(enemy);
+            
             foreach (var exit in exits)
             {
                 exit.RemoveEnemy(enemy.GetComponent<Enemy>());
             }
         }
     }
-
 }
