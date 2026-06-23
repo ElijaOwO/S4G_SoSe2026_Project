@@ -19,6 +19,7 @@ public class PlayerData : ScriptableObject
     public int attackDamage = 1;
     public float attackDuration = 0.1f;
     public float attackCooldown = 1.0f;
+    public float attackAreaSize = 1.0f;
 
     [Header("I-FRAMES")]
     public bool toggleIFrames = false;

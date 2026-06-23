@@ -1,5 +1,7 @@
 // Author: MS
 // edited by: JET
+
+using System;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
@@ -7,37 +9,36 @@ using UnityEngine.SceneManagement;
 
 
 public class PlayerPrototype : MonoBehaviour
-{
-    [SerializeField] private PlayerData playerData;
+{ 
     public CharacterController controller;
-    [SerializeField] private MarcPlayerUIController  uiController;
-
-    [SerializeField] private List<LevelExitScript> exits = new List<LevelExitScript>();
-    [SerializeField] private PlayerInputHandler inputHandler;
+    [SerializeField] private PlayerData playerData; 
+    [SerializeField] private MarcPlayerUIController  uiController; 
+    [SerializeField] private PlayerAttack playerAttack; 
+    
+    [SerializeField] private List<LevelExitScript> exits = new List<LevelExitScript>(); 
+    [SerializeField] private PlayerInputHandler inputHandler; 
     [SerializeField] private GameObject playerSpriteObject;
-
+    
     [SerializeField] private int hp;
-
-    private float currentSpeedMultiplier = 1.0f;
-    private bool isDashing = false;
-    private bool canDash = true;
-    private bool canAttack = true;
-    private bool isAttacking = false;
-    private bool iFrames = false;
-
-    private List<GameObject> enemys = new List<GameObject>();
-    private MyTimer attackCoolDownTimer = new MyTimer();
     
-    public  bool IsAttacking { get { return isAttacking; } }
-    public  bool IFrames { get { return iFrames; } }
-    public int Hp { get { return hp; } }
-
+    private float currentSpeedMultiplier = 1.0f; 
+    private bool isDashing = false; 
+    private bool canDash = true; 
+    private bool iFrames = false; 
     
+    public  bool IsAttacking { get { return playerAttack.IsAttacking; } } 
+    public  bool IFrames { get { return iFrames; } } 
+    public int Hp { get { return hp; } set { hp = value; } }
+
+    private void Start()
+    {
+        playerAttack.SetValues(playerData.attackDamage, playerData.attackDuration,
+                               playerData.attackCooldown, playerData.attackAreaSize, exits);
+    }
+
     void Update()
     {
         Move();
-        
-        attackCoolDownTimer.Update(Time.deltaTime);
     }
 
     private void Move()
@@ -48,12 +49,17 @@ public class PlayerPrototype : MonoBehaviour
         float vertical = direction.y;
 
         Vector3 velocity = new Vector3(horizontal, 0, vertical).normalized;
+
+        if (velocity != Vector3.zero)
+        {
+            playerAttack.transform.rotation = Quaternion.LookRotation(velocity);
+        }
         controller.Move(velocity * (Time.deltaTime * (playerData.speed * currentSpeedMultiplier)));
     }
 
     public void OnDash()
     {
-        if (!playerData.canDashDuringAttack && isAttacking)
+        if (!playerData.canDashDuringAttack && playerAttack.IsAttacking)
         {
             return;
         }
@@ -74,16 +80,7 @@ public class PlayerPrototype : MonoBehaviour
 
     public void OnAttack()
     {
-        if (attackCoolDownTimer.TimeOut())
-        {
-            if (enemys.Count > 0)
-            {
-                enemys[0].gameObject.GetComponent<Enemy>().Hit(playerData.attackDamage);
-            }
-            
-            StartCoroutine(AttackDurationTimer());
-            attackCoolDownTimer.Reset();
-        }
+        playerAttack.Attack();
     }
     
     public void Hit(int damage)
@@ -109,34 +106,9 @@ public class PlayerPrototype : MonoBehaviour
     
     public void RemoveDeadEnemy(GameObject enemy)
     {
-        if(enemys.Contains(enemy))
-        {
-            enemys.Remove(enemy);
-            
-            foreach (var exit in exits)
-            {
-                exit.RemoveEnemy(enemy.GetComponent<Enemy>());
-            }
-        }
+        playerAttack.RemoveDeadEnemy(enemy);
     }
     
-    private void OnTriggerEnter (Collider other) 
-    {
-        
-        if (!enemys.Contains(other.gameObject) && other.tag == "Enemy")
-        {
-            enemys.Add(other.gameObject);
-        }
-    }
-
-    private void OnTriggerExit (Collider other) 
-    {
-        if (other.tag == "Enemy")
-        {
-            enemys.Remove(other.gameObject);
-        }
-    }
-
     public void activateIFrames()
     {
         if(playerData.toggleIFrames)
@@ -187,13 +159,6 @@ public class PlayerPrototype : MonoBehaviour
         }
     }
     
-    private IEnumerator AttackDurationTimer()
-    {
-        isAttacking = true;
-        yield return new WaitForSeconds(playerData.attackDuration);
-        isAttacking = false;
-    }
-
     private IEnumerator SnapDashIFrames()
     {
         iFrames = true;

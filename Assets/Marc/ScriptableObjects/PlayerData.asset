@@ -19,9 +19,10 @@ MonoBehaviour:
   dashDuration: 0.2
   dashDelay: 0
   dashCooldown: 2
-  attackDamage: 1
-  attackDuration: 0.4
-  attackCooldown: 1
+  attackDamage: 3
+  attackDuration: 0.2
+  attackCooldown: 0.4
+  attackAreaSize: 1
   toggleIFrames: 1
   iFramesDuration: 3
   iFramesBlinkSpeed: 0.3
