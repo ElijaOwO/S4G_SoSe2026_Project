@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 public class SceneLoader : MonoBehaviour
 {
     [SerializeField] private Object scene;
+    [SerializeField] private StartMenu startMenu;
+    [SerializeField] private FileMenu fileMenu;
 
     public void LoadScene()
     {
@@ -24,5 +26,17 @@ public class SceneLoader : MonoBehaviour
         #else
                 Application.Quit();
         #endif
+    }
+
+    public void ShowStartMenu()
+    {
+        startMenu.gameObject.SetActive(true);
+        fileMenu.gameObject.SetActive(false);
+    }
+
+    public void HideStartMenu()
+    {
+        startMenu.gameObject.SetActive(false);
+        fileMenu.gameObject.SetActive(true);
     }
 }
