@@ -27,11 +27,13 @@ public class PlayerPrototype : MonoBehaviour
     public  bool IsAttacking { get { return playerAttack.IsAttacking; } } 
     public  bool IFrames { get { return iFrames; } }
     public int Hp { get { return playerData.currentHp; } set { playerData.currentHp = value; } }
+    public int maxHp { get { return playerData.maxHp; } set { playerData.maxHp = value; } }
 
     private void Start()
     {
         playerAttack.SetValues(playerData.attackDamage, playerData.attackDuration,
                                playerData.attackCooldown, playerData.attackAreaSize, exits);
+        uiController.SetHealthBarMaxHp(maxHp, Hp);
     }
 
     void Update()
@@ -89,7 +91,7 @@ public class PlayerPrototype : MonoBehaviour
         }
         
         Hp -= damage;
-        uiController.UpdateProgressBar(Hp);
+        uiController.UpdateHealthbar(Hp);
         activateIFrames();
 
         if (Hp <= 0)

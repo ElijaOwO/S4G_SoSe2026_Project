@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SaverLoader : MonoBehaviour
 {
-[SerializeField] Hp hp;
+    [SerializeField] PlayerData playerData;
 [SerializeField] bool resetJson;
 
 
@@ -27,7 +27,7 @@ private void Start()
 // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void SaveData()
     {
-        string json = JsonUtility.ToJson(hp);
+        string json = JsonUtility.ToJson(playerData);
         Debug.Log(json);
 
         using (StreamWriter witer =
@@ -54,6 +54,5 @@ private void Start()
        }
       //int data = JsonUtility.FromJson<int>(json);
       //player.Hp = data;
-       JsonUtility.FromJsonOverwrite(json, hp);
     }
 }
