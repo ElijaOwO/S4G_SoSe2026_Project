@@ -19,16 +19,14 @@ public class PlayerPrototype : MonoBehaviour
     [SerializeField] private PlayerInputHandler inputHandler; 
     [SerializeField] private GameObject playerSpriteObject;
     
-    [SerializeField] private int hp;
-    
     private float currentSpeedMultiplier = 1.0f; 
     private bool isDashing = false; 
     private bool canDash = true; 
     private bool iFrames = false; 
     
     public  bool IsAttacking { get { return playerAttack.IsAttacking; } } 
-    public  bool IFrames { get { return iFrames; } } 
-    public int Hp { get { return hp; } set { hp = value; } }
+    public  bool IFrames { get { return iFrames; } }
+    public int Hp { get { return playerData.currentHp; } set { playerData.currentHp = value; } }
 
     private void Start()
     {
@@ -90,11 +88,13 @@ public class PlayerPrototype : MonoBehaviour
             return;
         }
         
-        hp -= damage;
-        uiController.UpdateProgressBar(hp);
+        Hp -= damage;
+        uiController.UpdateProgressBar(Hp);
         activateIFrames();
-        if (hp <= 0)
+
+        if (Hp <= 0)
         {
+            Hp = playerData.maxHp;
             Die();
         }
     }

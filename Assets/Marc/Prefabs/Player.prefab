@@ -474,6 +474,7 @@ GameObject:
   - component: {fileID: 7350197517311728543}
   - component: {fileID: 7196122062287142199}
   - component: {fileID: 2105183640493294708}
+  - component: {fileID: 8819289813866284347}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -545,7 +546,6 @@ MonoBehaviour:
   exits: []
   inputHandler: {fileID: 7350197517311728543}
   playerSpriteObject: {fileID: 4814983333397689403}
-  hp: 10
 --- !u!114 &7350197517311728543
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -601,8 +601,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37541ebde4df8464d99f1694d457d615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MarcPlayerUIController
+  playerData: {fileID: 11400000, guid: f19df057f28f2674a96bcbb878af54a0, type: 2}
   player: {fileID: 2920429798795226697}
   uiDocument: {fileID: 2253710631041483807}
+--- !u!114 &8819289813866284347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6065664238622098552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 323ad8b98a401f74099c5db13ab0a830, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DontDestroy
+  objectIndex: 0
 --- !u!1 &9023655022970459252
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   attackCollider: {fileID: 1831572679497536096}
   attackMarker: {fileID: 2854083867814332800}
-  attackMarkerCanvas: {fileID: 2730996647549644556}
+  attackZone: {fileID: 0}
 --- !u!65 &1831572679497536096
 BoxCollider:
   m_ObjectHideFlags: 0
