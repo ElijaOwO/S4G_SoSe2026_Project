@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2697150507605919449}
-  - component: {fileID: 3733903362022815210}
+  - component: {fileID: 2675672632097045587}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -27,13 +27,13 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.22351521, w: 0.9747005}
   m_LocalPosition: {x: 0.09, y: -0.81, z: 0}
-  m_LocalScale: {x: 8.424784, y: 1, z: 1}
+  m_LocalScale: {x: 8.424784, y: 1, z: 4.2687}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4659875014758055313}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25.831}
---- !u!136 &3733903362022815210
-CapsuleCollider:
+--- !u!65 &2675672632097045587
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -50,10 +50,8 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 0
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8555660453273282903
 GameObject:

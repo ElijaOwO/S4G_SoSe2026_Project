@@ -60,8 +60,10 @@ public class PlayerAttack : MonoBehaviour
     
     private void OnTriggerEnter (Collider other) 
     {
+        Debug.Log("GRRR");
         if (!enemys.Contains(other.gameObject) && other.tag == "Enemy")
         {
+            Debug.Log("1");
             enemys.Add(other.gameObject);
         }
     }
