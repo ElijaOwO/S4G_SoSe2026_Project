@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8137c137a3007c942a19a4d82aefcadd, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
+  maxHp: 10
+  currentHp: 10
   speed: 5
   toggleInstantSnapDash: 0
   snapDashDistance: 1.5

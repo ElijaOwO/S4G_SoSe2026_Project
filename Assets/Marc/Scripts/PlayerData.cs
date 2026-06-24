@@ -4,6 +4,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "Scriptable Objects/PlayerData")]
 public class PlayerData : ScriptableObject
 {
+    [Header("HEALTH")]
+    public int maxHp = 10;
+    public int currentHp = 10;
+
     [Header("MOVEMENT")]
     public float speed = 5.0f;
 
@@ -30,4 +34,14 @@ public class PlayerData : ScriptableObject
     public bool ignoreDamageDuringDash = false;
     public bool canAttackDuringDash = false;
     public bool canDashDuringAttack = false;
+
+    private void OnEnable()
+    {
+        currentHp = maxHp;
+    }
+
+    private void OnValidate()
+    {
+        currentHp = maxHp;
+    }
 }

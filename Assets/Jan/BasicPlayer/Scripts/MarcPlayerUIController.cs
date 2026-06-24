@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 
 public class MarcPlayerUIController : MonoBehaviour
 {
+    [SerializeField] private PlayerData playerData;
     [SerializeField] private PlayerPrototype player;
     [SerializeField] private UIDocument uiDocument;
     
@@ -15,7 +16,7 @@ public class MarcPlayerUIController : MonoBehaviour
         if (progressBar != null)
         {
             progressBar.style.color = Color.darkGreen;
-            progressBar.highValue = player.Hp;
+            progressBar.highValue = playerData.maxHp;
             progressBar.lowValue = 0;
             UpdateProgressBar(player.Hp);
         }

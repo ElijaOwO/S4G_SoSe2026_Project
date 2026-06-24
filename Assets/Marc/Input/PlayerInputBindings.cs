@@ -199,7 +199,7 @@ public partial class @PlayerInputBindings: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""dad802fb-4900-476e-ac5c-43695497c7a2"",
-                    ""path"": ""<DualShockGamepad>/buttonSouth"",
+                    ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -221,7 +221,7 @@ public partial class @PlayerInputBindings: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""05b3f490-2122-4d6b-89e4-ec08b7549d0b"",
-                    ""path"": ""<DualShockGamepad>/buttonWest"",
+                    ""path"": ""<XInputController>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -232,7 +232,7 @@ public partial class @PlayerInputBindings: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""12995c54-d679-4667-96e2-e8fa7ab10ab1"",
-                    ""path"": ""<DualShockGamepad>/leftStick"",
+                    ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
