@@ -1,4 +1,5 @@
-using System;
+// Author: JET
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -59,7 +60,6 @@ public class PlayerAttack : MonoBehaviour
     
     private void OnTriggerEnter (Collider other) 
     {
-        Debug.Log("ftfzfzzguuuio");
         if (!enemys.Contains(other.gameObject) && other.tag == "Enemy")
         {
             enemys.Add(other.gameObject);

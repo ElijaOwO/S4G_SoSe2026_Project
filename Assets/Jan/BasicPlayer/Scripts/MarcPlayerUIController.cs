@@ -1,36 +1,34 @@
 // Author: JET
+
+using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class MarcPlayerUIController : MonoBehaviour
 {
     [SerializeField] private PlayerPrototype player;
-    [SerializeField] private UIDocument uiDocument;
+    [SerializeField] private Image healthBar;
+    [SerializeField] private TextMeshProUGUI healthBarText;
+    private int currentHp;
+    private int maxHp;
     
-    private ProgressBar progressBar;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void SetHealthBarMaxHp(int maxHp, int currentHp)
     {
-        progressBar = uiDocument.rootVisualElement.Q<ProgressBar>("ProgressBar");
-        if (progressBar != null)
-        {
-            progressBar.style.color = Color.darkGreen;
-            progressBar.highValue = player.Hp;
-            progressBar.lowValue = 0;
-            UpdateProgressBar(player.Hp);
-        }
+        this.maxHp = maxHp;
+        this.currentHp = currentHp;
+        UpdateHealthbar(currentHp);
     }
 
-    public void UpdateProgressBar(int hp)
+    public void UpdateHealthbar(int hp)
     {
-        progressBar.value = hp;
-        if (hp < hp * 1 / 3)
-        {
-            progressBar.style.color = Color.darkRed;
-        }
-        else if(hp < hp * 2 / 3)
-        {
-            progressBar.style.color = Color.darkGoldenRod;
-        }
+        currentHp = hp;
+        float fillamount = (float)currentHp / (float)maxHp;
+        healthBar.fillAmount = fillamount;
+        UpdateText();
+    }
+
+    public void UpdateText()
+    {
+        healthBarText.text = currentHp + " / " + maxHp;
     }
 }
