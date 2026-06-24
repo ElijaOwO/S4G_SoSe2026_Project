@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c9c16eab3122d43aeb4c21c66568c7, type: 3}
   m_Name: fast
   m_EditorClassIdentifier: Assembly-CSharp::MeleeEnemyData
-  attackDistance: 2.5
-  attackCooldown: 1
-  attackDamage: 1
-  attackWindup: 1
+  attackDistance: 2.75
+  attackCooldown: 0.75
+  attackDamage: 12
+  attackWindup: 0.66

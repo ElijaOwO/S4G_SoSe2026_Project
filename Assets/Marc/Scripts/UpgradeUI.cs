@@ -4,6 +4,7 @@ using UnityEngine;
 public class UpgradeUI : MonoBehaviour
 {
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private MarcPlayerUIController healthUI;
     [SerializeField] private ItemInteractable item;
 
     public void OnAttackButtonClicked()
@@ -20,11 +21,12 @@ public class UpgradeUI : MonoBehaviour
         Debug.Log(playerData.maxHp);
         Debug.Log(playerData.currentHp);
         item.HideUpgradeUI();
+        healthUI.SetHealthBarMaxHp(playerData.maxHp, playerData.currentHp);
     }
 
     public void OnSpeedButtonClicked()
     {
-        playerData.speed *= 1.1f;
+        playerData.speed *= 1.05f;
         Debug.Log(playerData.speed);
         item.HideUpgradeUI();
     }

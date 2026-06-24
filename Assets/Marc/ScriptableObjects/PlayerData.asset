@@ -12,22 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8137c137a3007c942a19a4d82aefcadd, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
-  maxHp: 10
-  currentHp: 10
-  speed: 5
+  maxHp: 50
+  currentHp: 50
+  speed: 8
   toggleInstantSnapDash: 0
   snapDashDistance: 1.5
-  dashMultiplier: 3
+  dashMultiplier: 2.5
   dashDuration: 0.2
   dashDelay: 0
-  dashCooldown: 2
-  attackDamage: 3
+  dashCooldown: 1
+  attackDamage: 8
   attackDuration: 0.2
-  attackCooldown: 0.4
-  attackAreaSize: 1
+  attackCooldown: 0.25
+  attackAreaSize: 0.65
   toggleIFrames: 1
-  iFramesDuration: 3
-  iFramesBlinkSpeed: 0.3
+  iFramesDuration: 0.25
+  iFramesBlinkSpeed: 0.1
   ignoreDamageDuringDash: 1
   canAttackDuringDash: 0
   canDashDuringAttack: 0
