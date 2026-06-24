@@ -1,10 +1,23 @@
-using System;
+// Author: JET / MS / youtube
 using System.IO;
 using UnityEngine;
 
 public class SaverLoader : MonoBehaviour
 {
-[SerializeField] PlayerPrototype player;
+[SerializeField] Hp hp;
+[SerializeField] bool resetJson;
+
+
+private void OnEnable()
+{
+    if (resetJson)
+    {
+        if (File.Exists(Application.dataPath + Path.AltDirectorySeparatorChar + "/SaveData.json"))
+        {
+           File.Delete(Application.dataPath + Path.AltDirectorySeparatorChar + "/SaveData.json");
+        }
+    }
+}
 
 private void Start()
 {
@@ -14,7 +27,7 @@ private void Start()
 // Start is called once before the first execution of Update after the MonoBehaviour is created
     public void SaveData()
     {
-        string json = JsonUtility.ToJson(player);
+        string json = JsonUtility.ToJson(hp);
         Debug.Log(json);
 
         using (StreamWriter witer =
@@ -39,8 +52,8 @@ private void Start()
        {
            json = reader.ReadToEnd();
        }
-       int data = JsonUtility.FromJson<int>(json);
-       player.Hp = data;
-       //JsonUtility.FromJsonOverwrite(json, player);
+      //int data = JsonUtility.FromJson<int>(json);
+      //player.Hp = data;
+       JsonUtility.FromJsonOverwrite(json, hp);
     }
 }
